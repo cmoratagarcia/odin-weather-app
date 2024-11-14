@@ -3,6 +3,10 @@ const searchBox = document.getElementById("search-box");
 const submitBtn = document.getElementById("submit-btn");
 const results = document.querySelector(".results");
 const resultsHeader = document.querySelector(".results-header");
+const resultsTitle = document.querySelector(".results-title");
+const condItem = document.querySelector(".conditions");
+const tempItem = document.querySelector(".temperature");
+const descrItem = document.querySelector(".description");
 
 form.addEventListener("submit", getQuery);
 
@@ -15,37 +19,14 @@ function getQuery(event) {
 }
 
 function renderResults(address, conditions, temperature, unit, description) {
-  results.innerHTML = "";
-
-  const resultsTitle = document.createElement("h2");
-  resultsTitle.classList.add("results-title");
   resultsTitle.innerText = address;
-  resultsHeader.appendChild(resultsTitle);
 
-  const celsiusBtn = document.createElement("button");
-  celsiusBtn.classList.add("temp-btn");
-  celsiusBtn.innerText = "°C";
-  resultsHeader.appendChild(celsiusBtn);
-  const fahrenheitBtn = document.createElement("button");
-  fahrenheitBtn.classList.add("temp-btn");
-  fahrenheitBtn.innerText = "°F";
-  resultsHeader.appendChild(fahrenheitBtn);
+  condItem.innerText = `Weather: ${conditions}`;
 
-  const condPara = document.createElement("p");
-  condPara.classList.add("results-item");
-  condPara.innerText = `Weather: ${conditions}`;
-  results.appendChild(condPara);
-
-  const tempPara = document.createElement("p");
-  tempPara.classList.add("results-item");
-  tempPara.innerText =
+  tempItem.innerText =
     `Temperature: ${temperature}` + `${unit === "°C" ? "°C" : "°F"}`;
-  results.appendChild(tempPara);
 
-  const descrPara = document.createElement("p");
-  descrPara.classList.add("results-item");
-  descrPara.innerText = `Forecast: ${description}`;
-  results.appendChild(descrPara);
+  descrItem.innerText = `Forecast: ${description}`;
 }
 
 function convertToFahrenheit(celsius) {
