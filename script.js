@@ -1,12 +1,12 @@
 const form = document.getElementById("form");
 const searchBox = document.getElementById("search-box");
-const button = document.querySelector("button");
+const submitBtn = document.getElementById("submit-btn");
 const results = document.querySelector(".results");
 const resultsHeader = document.querySelector(".results-header");
 
 form.addEventListener("submit", getQuery);
 
-button.addEventListener("click", getQuery);
+submitBtn.addEventListener("click", getQuery);
 
 function getQuery(event) {
   event.preventDefault();
