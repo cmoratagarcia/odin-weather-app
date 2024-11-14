@@ -1,6 +1,8 @@
 const form = document.getElementById("form");
 const searchBox = document.getElementById("search-box");
 const submitBtn = document.getElementById("submit-btn");
+const celsiusBtn = document.getElementById("celsius-btn");
+const fahrenheitBtn = document.getElementById("fahrenheit-btn");
 const results = document.querySelector(".results");
 const resultsHeader = document.querySelector(".results-header");
 const resultsTitle = document.querySelector(".results-title");
@@ -9,8 +11,9 @@ const tempItem = document.querySelector(".temperature");
 const descrItem = document.querySelector(".description");
 
 form.addEventListener("submit", getQuery);
-
 submitBtn.addEventListener("click", getQuery);
+celsiusBtn.addEventListener("click", console.log("C"));
+fahrenheitBtn.addEventListener("click", console.log("F"));
 
 function getQuery(event) {
   event.preventDefault();
