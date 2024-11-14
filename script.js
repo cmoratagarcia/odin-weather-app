@@ -13,6 +13,7 @@ function getQuery(event) {
   fetchWeatherData(city);
 }
 function renderResults(conditions, temperature) {
+  results.innerHTML = "";
   const condPara = document.createElement("p");
   condPara.classList.add("results-item");
   condPara.innerText = `Weather: ${conditions}`;
