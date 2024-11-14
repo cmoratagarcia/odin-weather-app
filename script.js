@@ -1,3 +1,17 @@
+const form = document.getElementById("form");
+const searchBox = document.getElementById("search-box");
+const button = document.querySelector("button");
+
+form.addEventListener("submit", getQuery);
+
+button.addEventListener("click", getQuery);
+
+function getQuery(event) {
+  event.preventDefault();
+  let city = searchBox.value;
+  fetchWeatherData(city);
+}
+
 function fetchWeatherData(location) {
   fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=ZBZPAPPSJEVGRLW8AU8DAEBCT&contentType=json`,
@@ -14,5 +28,3 @@ function fetchWeatherData(location) {
       console.log(info);
     });
 }
-
-fetchWeatherData("Madrid");
