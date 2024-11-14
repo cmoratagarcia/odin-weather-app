@@ -12,7 +12,7 @@ function getQuery(event) {
   let city = searchBox.value;
   fetchWeatherData(city);
 }
-function renderResults(conditions, temperature, unit) {
+function renderResults(conditions, temperature, unit, description) {
   results.innerHTML = "";
   const condPara = document.createElement("p");
   condPara.classList.add("results-item");
@@ -24,6 +24,11 @@ function renderResults(conditions, temperature, unit) {
   tempPara.innerText =
     `Temperature: ${temperature}` + `${unit === "°C" ? "°C" : "°F"}`;
   results.appendChild(tempPara);
+
+  const descrPara = document.createElement("p");
+  descrPara.classList.add("results-item");
+  descrPara.innerText = `Forecast: ${description}`;
+  results.appendChild(descrPara);
 }
 
 function convertToFahrenheit(celsius) {
@@ -47,7 +52,13 @@ function fetchWeatherData(location) {
       info.conditions = response.currentConditions.conditions;
       info.temperature = response.currentConditions.temp;
       info.unit = "°C";
-      renderResults(info.conditions, info.temperature, info.unit);
+      info.description = response.description;
+      renderResults(
+        info.conditions,
+        info.temperature,
+        info.unit,
+        info.description
+      );
     });
   //catch errors
 }
