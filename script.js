@@ -12,8 +12,14 @@ function getQuery(event) {
   let city = searchBox.value;
   fetchWeatherData(city);
 }
-function renderResults(conditions, temperature, unit, description) {
+function renderResults(address, conditions, temperature, unit, description) {
   results.innerHTML = "";
+
+  const resultsTitle = document.createElement("h2");
+  resultsTitle.classList.add("results-title");
+  resultsTitle.innerText = address;
+  results.appendChild(resultsTitle);
+
   const condPara = document.createElement("p");
   condPara.classList.add("results-item");
   condPara.innerText = `Weather: ${conditions}`;
@@ -49,11 +55,13 @@ function fetchWeatherData(location) {
       console.log(response);
       let info = {};
       //Could change this to a class constructor to allow for future expansions
+      info.address = response.resolvedAddress;
       info.conditions = response.currentConditions.conditions;
       info.temperature = response.currentConditions.temp;
       info.unit = "°C";
       info.description = response.description;
       renderResults(
+        info.address,
         info.conditions,
         info.temperature,
         info.unit,
