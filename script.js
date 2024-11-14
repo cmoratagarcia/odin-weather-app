@@ -8,8 +8,10 @@ function fetchWeatherData(location) {
     })
     //Write the functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app.
     .then((response) => {
-      console.log(response.currentConditions.conditions);
-      console.log(response.currentConditions.temp);
+      let info = {};
+      info["conditions"] = response.currentConditions.conditions;
+      info["temperature"] = response.currentConditions.temp;
+      console.log(info);
     });
 }
 
