@@ -2,6 +2,7 @@ const form = document.getElementById("form");
 const searchBox = document.getElementById("search-box");
 const button = document.querySelector("button");
 const results = document.querySelector(".results");
+const resultsHeader = document.querySelector(".results-header");
 
 form.addEventListener("submit", getQuery);
 
@@ -12,13 +13,23 @@ function getQuery(event) {
   let city = searchBox.value;
   fetchWeatherData(city);
 }
+
 function renderResults(address, conditions, temperature, unit, description) {
   results.innerHTML = "";
 
   const resultsTitle = document.createElement("h2");
   resultsTitle.classList.add("results-title");
   resultsTitle.innerText = address;
-  results.appendChild(resultsTitle);
+  resultsHeader.appendChild(resultsTitle);
+
+  const celsiusBtn = document.createElement("button");
+  celsiusBtn.classList.add("temp-btn");
+  celsiusBtn.innerText = "°C";
+  resultsHeader.appendChild(celsiusBtn);
+  const fahrenheitBtn = document.createElement("button");
+  fahrenheitBtn.classList.add("temp-btn");
+  fahrenheitBtn.innerText = "°F";
+  resultsHeader.appendChild(fahrenheitBtn);
 
   const condPara = document.createElement("p");
   condPara.classList.add("results-item");
