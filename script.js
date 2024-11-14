@@ -30,6 +30,7 @@ function renderResults(address, conditions, temperature, unit, description) {
     `Temperature: ${temperature}` + `${unit === "°C" ? "°C" : "°F"}`;
 
   descrItem.innerText = `Forecast: ${description}`;
+  results.style.display = "block";
 }
 
 function convertToFahrenheit(celsius) {
