@@ -10,6 +10,15 @@ const condItem = document.querySelector(".conditions");
 const tempItem = document.querySelector(".temperature");
 const descrItem = document.querySelector(".description");
 
+let info = {
+  address: "",
+  conditions: "",
+  celsius: "",
+  fahrenheit: "",
+  isMetric: true,
+  description: "",
+};
+
 form.addEventListener("submit", getQuery);
 submitBtn.addEventListener("click", getQuery);
 celsiusBtn.addEventListener("click", console.log("C"));
@@ -21,17 +30,19 @@ function getQuery(event) {
   fetchWeatherData(city);
 }
 
-function renderResults(address, conditions, temperature, unit, description) {
-  resultsTitle.innerText = address;
+function renderResults() {
+  resultsTitle.innerText = info.address;
 
-  condItem.innerText = `Weather: ${conditions}`;
+  condItem.innerText = `Weather: ${info.conditions}`;
 
-  tempItem.innerText =
-    `Temperature: ${temperature}` + `${unit === "°C" ? "°C" : "°F"}`;
+  tempItem.innerText = `Temperature: ${
+    info.isMetric ? info.celsius : info.fahrenheit
+  }`;
 
-  descrItem.innerText = `Forecast: ${description}`;
+  descrItem.innerText = `Forecast: ${info.description}`;
   results.style.display = "block";
 }
+//You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
 
 function convertToFahrenheit(celsius) {
   const fahrenheit = (celsius * 9) / 5 + 32;
@@ -48,21 +59,16 @@ function fetchWeatherData(location) {
     })
     //Write the functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app.
     .then((response) => {
-      console.log(response);
-      let info = {};
-      //Could change this to a class constructor to allow for future expansions
       info.address = response.resolvedAddress;
       info.conditions = response.currentConditions.conditions;
-      info.temperature = response.currentConditions.temp;
-      info.unit = "°C";
+      info.celsius = `${response.currentConditions.temp} °C`;
+      info.fahrenheit = `${convertToFahrenheit(
+        response.currentConditions.temp
+      )} °F`;
+      info.isMetric = true;
       info.description = response.description;
-      renderResults(
-        info.address,
-        info.conditions,
-        info.temperature,
-        info.unit,
-        info.description
-      );
+      console.log(info);
+      renderResults();
     });
   //catch errors
 }
