@@ -34,6 +34,7 @@ function renderResults() {
   resultsTitle.innerText = info.address;
 
   condItem.innerText = `Weather: ${info.conditions}`;
+  changeBackground(info.conditions);
 
   tempItem.innerText = `Temperature: ${
     info.isMetric ? `${info.celsius} °C` : `${info.fahrenheit} °F`
@@ -41,6 +42,30 @@ function renderResults() {
 
   descrItem.innerText = `Forecast: ${info.description}`;
   results.style.display = "block";
+}
+function changeBackground(condition) {
+  //Could create object with type codes from the API documentation
+  switch (condition) {
+    case "Sunny":
+      document.body.style.backgroundColor = "yellow";
+    case "Clear":
+      document.body.style.backgroundColor = "green";
+      break;
+    case "Overcast":
+      document.body.style.backgroundColor = "darkgray";
+      break;
+    case "Partially cloudy":
+      document.body.style.backgroundColor = "blue";
+      break;
+    case "Rain":
+      document.body.style.backgroundColor = "aqua";
+      break;
+    case "Snow":
+      document.body.style.backgroundColor = "beige";
+      break;
+    default:
+      document.body.style.backgroundColor = "grey";
+  }
 }
 //You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
 function switchToCelsius() {
