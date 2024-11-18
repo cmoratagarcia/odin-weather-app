@@ -19,6 +19,15 @@ let info = {
   description: "",
 };
 
+const backgrounds = {
+  Sunny: "yellow",
+  Clear: "green",
+  Overcast: "darkgray",
+  "Partially cloudy": "blue",
+  Rain: "aqua",
+  Snow: "beige",
+};
+
 form.addEventListener("submit", getQuery);
 submitBtn.addEventListener("click", getQuery);
 celsiusBtn.addEventListener("click", switchToCelsius);
@@ -44,28 +53,9 @@ function renderResults() {
   results.style.display = "block";
 }
 function changeBackground(condition) {
-  //Could create object with type codes from the API documentation
-  switch (condition) {
-    case "Sunny":
-      document.body.style.backgroundColor = "yellow";
-    case "Clear":
-      document.body.style.backgroundColor = "green";
-      break;
-    case "Overcast":
-      document.body.style.backgroundColor = "darkgray";
-      break;
-    case "Partially cloudy":
-      document.body.style.backgroundColor = "blue";
-      break;
-    case "Rain":
-      document.body.style.backgroundColor = "aqua";
-      break;
-    case "Snow":
-      document.body.style.backgroundColor = "beige";
-      break;
-    default:
-      document.body.style.backgroundColor = "grey";
-  }
+  const backgroundColor = backgrounds[condition] || "white";
+
+  document.body.style.backgroundColor = backgroundColor;
 }
 //You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
 function switchToCelsius() {
