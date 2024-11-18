@@ -20,12 +20,12 @@ let info = {
 };
 
 const backgrounds = {
-  Sunny: "yellow",
-  Clear: "green",
-  Overcast: "darkgray",
-  "Partially cloudy": "blue",
-  Rain: "aqua",
-  Snow: "beige",
+  Sunny: "url('./Assets/sunny.jpg')",
+  Clear: "url('./Assets/clear.jpg')",
+  Overcast: "url('./Assets/overcast.jpg')",
+  "Partially cloudy": "url('./Assets/partially-cloudy.jpg')",
+  Rain: "url('./Assets/rainy.jpg')",
+  Snow: "url('./Assets/snowy.jpg')",
 };
 
 form.addEventListener("submit", getQuery);
@@ -53,9 +53,9 @@ function renderResults() {
   results.style.display = "block";
 }
 function changeBackground(condition) {
-  const backgroundColor = backgrounds[condition] || "white";
+  const backgroundImg = backgrounds[condition] || "url('default.jpg')";
 
-  document.body.style.backgroundColor = backgroundColor;
+  document.body.style.backgroundImage = backgroundImg;
 }
 //You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
 function switchToCelsius() {
