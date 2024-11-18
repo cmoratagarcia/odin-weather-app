@@ -13,16 +13,16 @@ const descrItem = document.querySelector(".description");
 let info = {
   address: "",
   conditions: "",
-  celsius: "",
-  fahrenheit: "",
+  celsius: 0,
+  fahrenheit: 0,
   isMetric: true,
   description: "",
 };
 
 form.addEventListener("submit", getQuery);
 submitBtn.addEventListener("click", getQuery);
-celsiusBtn.addEventListener("click", console.log("C"));
-fahrenheitBtn.addEventListener("click", console.log("F"));
+celsiusBtn.addEventListener("click", switchToCelsius);
+fahrenheitBtn.addEventListener("click", switchToFahrenheit);
 
 function getQuery(event) {
   event.preventDefault();
@@ -36,17 +36,21 @@ function renderResults() {
   condItem.innerText = `Weather: ${info.conditions}`;
 
   tempItem.innerText = `Temperature: ${
-    info.isMetric ? info.celsius : info.fahrenheit
+    info.isMetric ? `${info.celsius} °C` : `${info.fahrenheit} °F`
   }`;
 
   descrItem.innerText = `Forecast: ${info.description}`;
   results.style.display = "block";
 }
 //You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
+function switchToCelsius() {
+  info.isMetric = true;
+  renderResults();
+}
 
-function convertToFahrenheit(celsius) {
-  const fahrenheit = (celsius * 9) / 5 + 32;
-  return fahrenheit;
+function switchToFahrenheit() {
+  info.isMetric = false;
+  renderResults();
 }
 
 function fetchWeatherData(location) {
@@ -61,11 +65,8 @@ function fetchWeatherData(location) {
     .then((response) => {
       info.address = response.resolvedAddress;
       info.conditions = response.currentConditions.conditions;
-      info.celsius = `${response.currentConditions.temp} °C`;
-      info.fahrenheit = `${convertToFahrenheit(
-        response.currentConditions.temp
-      )} °F`;
-      info.isMetric = true;
+      info.celsius = response.currentConditions.temp;
+      info.fahrenheit = (response.currentConditions.temp * 9) / 5 + 32;
       info.description = response.description;
       console.log(info);
       renderResults();
