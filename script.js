@@ -29,7 +29,6 @@ const backgrounds = {
 };
 
 form.addEventListener("submit", getQuery);
-submitBtn.addEventListener("click", getQuery);
 celsiusBtn.addEventListener("click", switchToCelsius);
 fahrenheitBtn.addEventListener("click", switchToFahrenheit);
 
