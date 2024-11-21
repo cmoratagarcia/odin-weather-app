@@ -78,7 +78,8 @@ function changeTempButton(metric) {
 }
 
 function convertToFahrenheit(celsius) {
-  return (celsius * 9) / 5 + 32;
+  let result = (celsius * 9) / 5 + 32;
+  return result.toFixed(2);
 }
 
 //Toggle temp value and unit between F and C
