@@ -51,9 +51,11 @@ function renderResults() {
 
   descrItem.innerText = `Forecast: ${info.description}`;
   results.style.display = "block";
+  document.body.style.flexDirection = "column";
 }
+
 function changeBackground(condition) {
-  const backgroundImg = backgrounds[condition] || "url('default.jpg')";
+  const backgroundImg = backgrounds[condition] || "none";
 
   document.body.style.backgroundImage = backgroundImg;
 }
@@ -83,7 +85,7 @@ function fetchWeatherData(location) {
       info.celsius = response.currentConditions.temp;
       info.fahrenheit = (response.currentConditions.temp * 9) / 5 + 32;
       info.description = response.description;
-      console.log(info);
+
       renderResults();
     });
   //catch errors
