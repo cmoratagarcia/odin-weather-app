@@ -50,7 +50,7 @@ function renderResults() {
   }`;
 
   descrItem.innerText = `Forecast: ${info.description}`;
-  results.style.display = "block";
+  results.style.display = "flex";
   document.body.style.flexDirection = "column";
 }
 
