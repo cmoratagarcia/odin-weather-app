@@ -74,3 +74,10 @@ form {
 .results-item {
     margin-bottom: 15px;
 }
+
+.results-error {
+   display: block;
+    color: red;
+   background-color: #f3aaa0;
+  max-width: 300px;
+}
