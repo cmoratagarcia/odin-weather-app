@@ -58,20 +58,36 @@ function renderResults() {
   results.style.display = "flex";
   document.body.style.flexDirection = "column";
 }
-
+//You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
 function changeBackground(condition) {
   const backgroundImg = backgrounds[condition] || "none";
 
   document.body.style.backgroundImage = backgroundImg;
 }
-//You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
+
+function changeTempButton(metric) {
+  if (metric) {
+    celsiusBtn.classList.add("selected");
+    fahrenheitBtn.classList.remove("selected");
+  } else {
+    celsiusBtn.classList.remove("selected");
+    fahrenheitBtn.classList.add("selected");
+  }
+}
+
+function convertToFahrenheit(celsius) {
+  return (celsius * 9) / 5 + 32;
+}
+
 function switchToCelsius() {
   info.isMetric = true;
+  changeTempButton(info.isMetric);
   renderResults();
 }
 
 function switchToFahrenheit() {
   info.isMetric = false;
+  changeTempButton(info.isMetric);
   renderResults();
 }
 
@@ -121,7 +137,7 @@ function fetchWeatherData(location) {
       info.address = response.resolvedAddress;
       info.conditions = response.currentConditions.conditions;
       info.celsius = response.currentConditions.temp;
-      info.fahrenheit = (response.currentConditions.temp * 9) / 5 + 32;
+      info.fahrenheit = convertToFahrenheit(info.celsius);
       info.description = response.description;
 
       renderResults();

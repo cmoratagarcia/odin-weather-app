@@ -86,3 +86,6 @@ form {
     text-align: center;
     line-height: 25px;
 }
+.selected {
+    background-color: #3b4d50;
+}
