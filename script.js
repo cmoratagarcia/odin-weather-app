@@ -79,6 +79,8 @@ function displayError() {
 
   errorPara.classList.add("results-error");
   document.body.appendChild(errorPara);
+
+  results.style.display = "none";
 }
 
 function fetchWeatherData(location) {
