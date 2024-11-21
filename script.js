@@ -105,5 +105,4 @@ function fetchWeatherData(location) {
     .catch((error) => {
       displayError();
     });
-  //catch errors
 }
