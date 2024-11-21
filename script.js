@@ -73,13 +73,32 @@ function switchToFahrenheit() {
   renderResults();
 }
 
-function displayError() {
+function handleError(error) {
   let errorPara = document.createElement("p");
-  errorPara.innerText = "Error. Please enter a valid location";
-
   errorPara.classList.add("results-error");
-  document.body.appendChild(errorPara);
 
+  // Customized error messages based on status codes
+  switch (error.message) {
+    case "400":
+      errorPara.innerText = "Please enter a valid location.";
+      break;
+    case "401":
+      errorPara.innerText =
+        "Unauthorized: Please check your API key or account status.";
+      break;
+    case "429":
+      errorPara.innerText =
+        "Too Many Requests: You have exceeded your API limits. Please try again later.";
+      break;
+    case "500":
+      errorPara.innerText =
+        "Server Error: The weather service is currently unavailable. Please try again later.";
+      break;
+    default:
+      errorPara.innerText = "An unexpected error occurred. Please try again.";
+  }
+
+  document.body.appendChild(errorPara);
   results.style.display = "none";
 }
 
@@ -89,11 +108,14 @@ function fetchWeatherData(location) {
     { mode: "cors" }
   )
     .then((response) => {
+      if (!response.ok) {
+        // Handle HTTP errors by throwing an error with status
+        throw new Error(response.status);
+      }
       return response.json();
     })
     //Write the functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app.
     .then((response) => {
-      console.log(response);
       info.address = response.resolvedAddress;
       info.conditions = response.currentConditions.conditions;
       info.celsius = response.currentConditions.temp;
@@ -103,6 +125,6 @@ function fetchWeatherData(location) {
       renderResults();
     })
     .catch((error) => {
-      displayError();
+      handleError(error);
     });
 }
