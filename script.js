@@ -40,7 +40,8 @@ function getQuery(event) {
 }
 
 function renderResults() {
-  results.classList.remove("results-error");
+  const errorPara = document.querySelector(".results-error");
+  errorPara.remove();
 
   resultsTitle.innerText = info.address;
 
@@ -73,9 +74,13 @@ function switchToFahrenheit() {
 }
 
 function displayError() {
-  results.innerText = "Error. Please enter a valid location";
-  results.classList.add("results-error");
+  let errorPara = document.createElement("p");
+  errorPara.innerText = "Error. Please enter a valid location";
+
+  errorPara.classList.add("results-error");
+  document.body.appendChild(errorPara);
 }
+
 function fetchWeatherData(location) {
   fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=ZBZPAPPSJEVGRLW8AU8DAEBCT&contentType=json`,

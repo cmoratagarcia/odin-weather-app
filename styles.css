@@ -76,8 +76,9 @@ form {
 }
 
 .results-error {
-   display: block;
-    color: red;
+    display: block;
+     color: red;
    background-color: #f3aaa0;
-  max-width: 300px;
+  width: 150px;
+  margin-left: 20px;
 }
