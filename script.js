@@ -45,9 +45,9 @@ function getQuery(event) {
 
 //Display results
 function renderResults() {
-  const errorPara = document.querySelector(".results-error");
-  if (errorPara) {
-    errorPara.remove();
+  const existingError = document.querySelector(".results-error");
+  if (existingError) {
+    existingError.remove();
   }
 
   resultsTitle.innerText = info.address;
