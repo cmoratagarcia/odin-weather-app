@@ -33,12 +33,14 @@ submitBtn.addEventListener("click", getQuery);
 celsiusBtn.addEventListener("click", switchToCelsius);
 fahrenheitBtn.addEventListener("click", switchToFahrenheit);
 
+//Get data from search box on form submit
 function getQuery(event) {
   event.preventDefault();
   let city = searchBox.value;
   fetchWeatherData(city);
 }
 
+//Display results
 function renderResults() {
   const errorPara = document.querySelector(".results-error");
   if (errorPara) {
@@ -58,13 +60,14 @@ function renderResults() {
   results.style.display = "flex";
   document.body.style.flexDirection = "column";
 }
-//You should change the look of the page based on the data, maybe by changing the color of the background or by adding images that describe the weather
+//Change the look of the page based on the data (project requirement)
 function changeBackground(condition) {
   const backgroundImg = backgrounds[condition] || "none";
 
   document.body.style.backgroundImage = backgroundImg;
 }
 
+//Highlight selected temp button
 function changeTempButton(metric) {
   if (metric) {
     celsiusBtn.classList.add("selected");
@@ -79,6 +82,7 @@ function convertToFahrenheit(celsius) {
   return (celsius * 9) / 5 + 32;
 }
 
+//Toggle temp value and unit between F and C
 function switchToCelsius() {
   info.isMetric = true;
   changeTempButton(info.isMetric);
@@ -91,8 +95,12 @@ function switchToFahrenheit() {
   renderResults();
 }
 
+//Display error message on form submit
 function handleError(error) {
-  let errorPara = document.createElement("p");
+  const existingError = document.querySelector(".results-error");
+  if (existingError) existingError.remove(); // Remove old error message to prevent multiples
+
+  const errorPara = document.createElement("p");
   errorPara.classList.add("results-error");
 
   // Customized error messages based on status codes
@@ -120,6 +128,7 @@ function handleError(error) {
   results.style.display = "none";
 }
 
+//Fetch data from API
 function fetchWeatherData(location) {
   fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=ZBZPAPPSJEVGRLW8AU8DAEBCT&contentType=json`,
