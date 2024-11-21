@@ -40,6 +40,8 @@ function getQuery(event) {
 }
 
 function renderResults() {
+  results.classList.remove("results-error");
+
   resultsTitle.innerText = info.address;
 
   condItem.innerText = `Weather: ${info.conditions}`;
