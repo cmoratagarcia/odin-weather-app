@@ -77,8 +77,12 @@ form {
 
 .results-error {
     display: block;
-     color: red;
-   background-color: #f3aaa0;
-  width: 150px;
-  margin-left: 20px;
+    color: red;
+    background-color: #f3aaa0;
+    max-width: 150px;
+    min-height: 50px;
+    margin-left: 20px;
+    padding: 5px;
+    text-align: center;
+    line-height: 25px;
 }
