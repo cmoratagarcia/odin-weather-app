@@ -36,6 +36,10 @@ fahrenheitBtn.addEventListener("click", switchToFahrenheit);
 function getQuery(event) {
   event.preventDefault();
   let city = searchBox.value;
+  if (!city) {
+    handleError({ message: "400" });
+    return;
+  }
   fetchWeatherData(city);
 }
 
