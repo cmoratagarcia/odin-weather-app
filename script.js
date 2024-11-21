@@ -70,6 +70,10 @@ function switchToFahrenheit() {
   renderResults();
 }
 
+function displayError() {
+  results.innerText = "Error. Please enter a valid location";
+  results.classList.add("results-error");
+}
 function fetchWeatherData(location) {
   fetch(
     `https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${location}?unitGroup=metric&key=ZBZPAPPSJEVGRLW8AU8DAEBCT&contentType=json`,
@@ -80,6 +84,7 @@ function fetchWeatherData(location) {
     })
     //Write the functions that process the JSON data you’re getting from the API and return an object with only the data you require for your app.
     .then((response) => {
+      console.log(response);
       info.address = response.resolvedAddress;
       info.conditions = response.currentConditions.conditions;
       info.celsius = response.currentConditions.temp;
@@ -87,6 +92,9 @@ function fetchWeatherData(location) {
       info.description = response.description;
 
       renderResults();
+    })
+    .catch((error) => {
+      displayError();
     });
   //catch errors
 }
