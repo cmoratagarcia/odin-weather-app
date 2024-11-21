@@ -2,6 +2,8 @@ body {
     height: 100%;
     background-size: cover;
 
+    font-family: "Montserrat", sans-serif;;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -43,28 +45,32 @@ form {
 .results {
     display:none;
     background-color: #b3d2d8;
+    margin-top: 30px;
     width: 40%;
     padding: 15px;
     border-radius: 4px;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .results-header {
     display: flex;
     flex-direction: column;
     align-items: center;
-    max-width: 80%;
+    max-width: 85%;
+    margin-left: 30px;
 }
 .temp-btn {
     min-width: 100px;
 }
 .results-list {
+    margin-top: 30px;
     list-style-type: none;
     padding: 0;
-    max-width: 70%;
- }
+    max-width: 85%;
+    margin-left: 30px;
+}
 
 .results-item {
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
